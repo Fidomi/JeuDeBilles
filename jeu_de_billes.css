@@ -1,0 +1,296 @@
+html{
+	font-size:16px;
+}
+
+
+body{
+	background-color: #989898;
+	max-width:40rem;
+	height:100%;
+}
+
+h1{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
+	font-size: 4rem;
+	color:#BCEA39;
+}
+
+h2{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
+	font-size: 2rem;
+	color:#BCEA39;
+	position: relative;
+    margin: 0;
+}
+
+h3{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 2rem;
+	color:#989898;
+	margin: 0.3rem;
+}
+
+p{
+	padding:2%;
+	font-size:1.2rem;
+}
+
+
+
+.hide{
+	display:none;
+}
+
+.block{
+	display: inline-block;
+}
+
+.centrer{
+	margin:auto auto;
+	height:100%;
+}
+
+.flex-container{
+	display : flex;
+	flex-flow: row nowrap;
+	justify-content :space-between;
+	align-items: center;
+}
+
+.column{
+	display : flex;
+	flex-flow: column nowrap;
+	justify-content : center;
+	align-items: stretch;
+	padding:2%;
+	margin: 0 auto;
+}
+
+.noir{
+	font-family: 'Roboto', sans-serif;
+	background-color: black;
+	color:#989898;
+}
+
+
+
+
+
+
+
+
+
+
+/**********HEADER ACCUEIL : nom du jeu et infos sur la partie*******************/
+/**********HEADER ACCUEIL: nom du jeu et infos sur la partie******************/
+/**********HEADER ACCUEIL: nom du jeu et infos sur la partie******************/
+
+.titre{
+	height : 7.8rem;
+	width:100%;
+	margin-top: 3rem;
+}
+
+ #nom-jeu{
+ 	flex-basis:50%;
+ 	order:1;
+ 	line-height:0.85em;
+ 	margin: 0.2rem;
+ 	padding:0.4rem;
+ 	text-align:right;
+ 	border-left:5rem solid #BCEA39;
+ }
+
+ #menu-jeu{
+ 	background-color:#BCEA39;
+ 	flex-basis:50%;
+ 	height:80%;
+ 	order:2;
+ 	padding:0.8rem;
+ }
+
+h4{
+ 	font-family: 'Roboto', sans-serif;
+	font-weight: 600;
+	font-size: 0.90em;
+	color:#989898;
+	margin: 0;
+	padding: 0;
+	flex: 50%;
+	text-align: center;
+ }
+
+.insert-label{
+	display:flex;
+	position:relative;
+	margin:0.2rem;
+	padding:0.2rem;
+	z-index:1;
+	height:4rem;
+ 	width:4rem;
+}
+ 
+.joueurs{
+	position:absolute;
+ 	appearance:none;
+ 	display:inline;
+ 	background-color: #989898;
+ 	height:4rem;
+ 	width:4rem;
+ 	display:block;
+ }
+
+#premier,
+#deuxieme{
+	z-index:4;
+	padding-left:0.8rem;
+	line-height:4rem;
+	margin: 0.2rem;
+}
+
+
+input {
+    color: #BCEA39;
+    appearance: none;
+    background-color: #989898;
+    cursor: text;
+    margin: 0em;
+    font-family: 'Roboto', sans-serif;
+    font-size:4rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border: none;
+    height:3.6rem;
+    width:8rem;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+
+
+
+
+
+
+
+
+
+/*****************MAIN : corps du jeu*****************/
+/*****************MAIN : corps du jeu*****************/
+/*****************MAIN : corps du jeu*****************/
+
+
+
+/*****************MAIN : ACCUEIl*****************/
+
+#jeu{
+	display:inline-block;
+	background-color: #989898;
+	height:50rem;
+	width:100%;
+	align-items: stretch;
+	margin:0rem 0rem 2rem 0rem;
+}
+
+.circle {
+   display:block;
+   position: relative;
+   width: 20rem;
+   height: 20rem;
+   shape-outside: circle(40% margin-box);
+   clip-path: circle();
+   background: black;
+   margin:15rem auto;
+   text-align: center;
+   display:none;
+
+}
+
+#play{
+	position: absolute;
+	top: 50%;
+	left:50%;
+    transform: translate(-50%, -50%);
+    background-color:black;
+    border:none;
+    box-shadow: none;
+}
+
+#play:hover {
+    background-color: #989898;
+}
+
+#styled:active {
+    box-shadow: none;
+}
+
+
+
+/*****************MAIN : INSCRIPTION 2 JOUEURS****************/
+.block h1{
+	display:block;
+	color:#989898;
+	font-size:2.5rem;
+	text-align: center;
+}
+
+.container-inscription{
+	display:flex;
+	flex-flow:column;
+/*	justify-content: center;*/
+	text-align: center;
+    align-items: stretch;
+	width:48%;
+	height: 85%;
+	background-color: #E5E5E5;
+}
+
+label>h3{
+	text-align: center;
+	margin:0;
+}
+
+label>img{
+	width: 8rem;
+
+}
+
+label.nom{
+	height:2.2rem;
+	margin-top:0rem;
+}
+
+input[type=text]{
+	height:2.2rem;
+	margin: 0.5rem 1rem;
+	width:auto;
+	background-color:#989898;
+}
+
+.label-avatar{
+	display:flex;
+	margin:1rem;
+}
+
+input[name=avatar1],
+input[name=avatar2]{
+	position:absolute;
+	background-color: red;
+	width:8rem;
+	height:8rem;
+	z-index:1;
+}
+
+.joueur-inscription{
+	margin-top:0.5rem;
+}
+
+label img{
+	z-index:6;
+}
+

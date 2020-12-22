@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Billes</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" type="text/css" href="jeu_de_billes.css">
+    
+</head>
+
+
+
+
+<body class="column centrer">
+    <!-- PRESENTATION DU PROJET   
+        1 - Les formulaires d'inscription (on sauve les données dans un tableau : joueur1, joueur2, nb de billes)
+        2 - Les interfaces des joueurs
+        3 - Algorithme du jeu
+            - tester le jeu sans les conditions
+            - puis placer les conditions peu à peu
+        OPTIONNEL : prévoir un "Local Storage" pour enregistrer la partie
+    -->
+
+
+
+<!-- HEADER : nom du jeu et infos sur la partie   -->
+<!-- HEADER : nom du jeu et infos sur la partie   -->
+<!-- HEADER : nom du jeu et infos sur la partie   -->
+<!-- HEADER : nom du jeu et infos sur la partie   -->
+
+
+    <!-- HEADER : PAGE INTRO   -->
+    <header class="flex-container titre centrer">
+        <h1 id="nom-jeu">JEU DE BILLES</h1>
+
+        <form action="" id="menu-jeu" class="column">
+            <div class="flex-container">
+                <h4>NOMBRE DE JOUEURS</h4>
+                <h4>NOMBRE DE BILLES</h4>
+            </div>
+
+            <div class="flex-container">
+
+                <div class="flex-container">
+                
+                    <label for="un" class="insert-label">
+                        <h1 id="premier">1</h1>
+                        <input type="radio" id="un" name="nb_joueurs"class="joueurs" checked>
+                    </label>
+                                    
+                    
+                    <label for="deux" class="insert-label">
+                        <h1  id="deuxieme">2</h1>
+                        <input type="radio" id="deux" name="nb_joueurs" class="joueurs" checked>
+                    </label>
+
+                </div>
+                    
+                <input type=number name="nombre-billes" min="20" max="100">
+
+            </div>
+
+        </form>
+             
+        
+    </header>
+
+
+<!-- MAIN : corps du jeu   -->
+<!-- MAIN : corps du jeu   -->
+<!-- MAIN : corps du jeu   -->
+<!-- MAIN : corps du jeu   -->
+
+    <main id="jeu" class="flex-container centrer">
+
+        <!-- Bouton de lancement du jeu-->
+        <section class="circle hide">
+            <button class="hide" type="button" id="play">
+                <h2 >LET'S PLAY</h2>
+                <p class="noir hide"></p>
+            </button>
+        </section>
+
+
+
+
+    <!-- Enregistrement des joueurs-->
+        <section class="flex-container centrer">
+
+            <div class="block container-inscription">
+                <h1 class="joueur-inscription">JOUEUR 1</h1>
+                <label for="name1" class='nom'><h3>NOM</h3></label>
+                <input type="text" id="name1" name="name1">
+                <h3>AVATAR</h3>
+                <form  class="centrer" action="">
+                    
+                    <label for="avatar_1a" class="label-avatar">
+                        <img src="./images/singe.png">
+                        <input type="radio" id="avatar-1a" name="avatar1">
+                    </label>
+
+                    
+                    <label for="avatar_1b" class="label-avatar">
+                        <img src="./images/singe.png">
+                        <input type="radio" id="avatar-1b" name="avatar1">
+                    </label>
+
+                    
+                    <label for="avatar_1c" class="label-avatar">
+                        <img src="./images/singe.png">
+                        <input type="radio" id="avatar-1c" name="avatar1">
+                    </label>
+                    
+                    <button type="submit"></button>
+    
+                </form>
+
+            </div>
+
+            <div class="block container-inscription">
+                <h1 class="joueur-inscription">JOUEUR 2</h1>
+                <label for="name2" class='nom'><h3>NOM</h3></label>
+                <input type="text" id="name2" name="name2">
+                <h3>AVATAR</h3>
+                <form  class="centrer" action="">
+                    
+                    <label for="avatar_2a" class="label-avatar">
+                        <img src="./images/singe.png">
+                        <input type="radio" id="avatar-2a" name="avatar2">
+                    </label>
+
+                    
+                    <label for="avatar_2b" class="label-avatar">
+                        <img src="./images/singe.png">
+                        <input type="radio" id="avatar-2b" name="avatar2">
+                    </label>
+
+                    
+                    <label for="avatar_2c" class="label-avatar">
+                        <img src="./images/singe.png">
+                        <input type="radio" id="avatar-2c" name="avatar2">
+                    </label>
+                    
+                    <button type="submit"></button>
+    
+                </form>
+            </div>
+
+
+        </section>
+        
+
+    </main>
+
+
+
+
+<!-- FOOTER : règles du jeu   -->
+<!-- FOOTER : règles du jeu   -->
+<!-- FOOTER : règles du jeu   -->
+<!-- FOOTER : règles du jeu   -->
+
+    <footer class="flex-container centrer noir">
+
+        <p class="regles">LE JEU : déterminer un nombre de billes initial entre 20 et 100. Chaque joueur enlève tour à tour 1, 2 ou 3 billes sans prendre le même nombre de billes que le joueur précédent.</p>
+        <p class="regles">Si le joueur 1 prend 2 billes, le joueur 2 pourra en prendre 1 ou 3. Vous avez droit à 3 erreurs. Le premier joueur qui commet 4 erreurs ou qui ne peut plus jouer a perdu.</p>
+
+
+
+        
+
+
+    </footer>
+    
+    
+
+
+
+
+
+
+<script type="text/javascript" src="jeu_de_billes.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
