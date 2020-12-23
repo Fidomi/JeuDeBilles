@@ -43,61 +43,63 @@
         <form action="" id="menu-jeu" class="column">
             <div class="flex-container">
                 <h4>NOMBRE DE JOUEURS</h4>
-                <h4>NOMBRE DE BILLES</h4>
+                <h4>NOMBRE<br>DE BILLES</h4>
             </div>
 
             <div class="flex-container">
-
-                <div class="flex-container">
-                
-                    <label for="un" class="insert-label">
-                        <h1 id="premier">1</h1>
-                        <input type="radio" id="un" name="nb_joueurs"class="joueurs" checked>
-                    </label>
-                                    
-                    
-                    <label for="deux" class="insert-label">
-                        <h1  id="deuxieme">2</h1>
-                        <input type="radio" id="deux" name="nb_joueurs" class="joueurs" checked>
-                    </label>
-
+                <div class="item">
+                    <input type="radio" id="un" name="nb_joueurs" value="1">
+                    <label for="un">1</label>
                 </div>
-                    
-                <input type=number name="nombre-billes" min="20" max="100">
+
+                <div class="item">
+                    <input type="radio" id="deux" name="nb_joueurs" value="2">
+                    <label for="deux">2</label>      
+                </div>             
+  
+                <input type=number name="nombre-billes" min="20" max="100" value="">
 
             </div>
-
         </form>
-             
-        
     </header>
 
 
+
 <!-- MAIN : corps du jeu   -->
 <!-- MAIN : corps du jeu   -->
 <!-- MAIN : corps du jeu   -->
 <!-- MAIN : corps du jeu   -->
 
-    <main id="jeu" class="flex-container centrer">
+    <main class="flex-container">
 
-        <!-- Bouton de lancement du jeu-->
-        <section class="circle hide">
-            <button class="hide" type="button" id="play">
-                <h2 >LET'S PLAY</h2>
-                <p class="noir hide"></p>
-            </button>
+
+        <section id="jeu">
+
+            <!-- Bouton de lancement du jeu-->
+            <div class="circle" id="circle">
+                <button type="button" id="play">
+                    <h2 >LET'S PLAY</h2>
+                    <p class="message" id="messageJoueur"></p>
+                    <p class="message" id="messageBilles"></p>
+                </button>
+            </div>
         </section>
 
 
 
 
     <!-- Enregistrement des joueurs-->
+    <!-- Enregistrement des joueurs-->
+    <!-- Enregistrement des joueurs-->
+    <!-- Enregistrement des joueurs-->
+
+
         <section class="flex-container centrer">
 
-            <div class="block container-inscription">
+            <div class="block container-inscription hide" id="un-joueur">
                 <h1 class="joueur-inscription">JOUEUR 1</h1>
                 <label for="name1" class='nom'><h3>NOM</h3></label>
-                <input type="text" id="name1" name="name1">
+                <input type="text" id="name1" name="name1" placeholder="Entrez votre nom">
                 <h3>AVATAR</h3>
                 <form  class="centrer" action="">
                     
@@ -117,17 +119,15 @@
                         <img src="./images/singe.png">
                         <input type="radio" id="avatar-1c" name="avatar1">
                     </label>
-                    
-                    <button type="submit"></button>
-    
                 </form>
-
             </div>
 
-            <div class="block container-inscription">
+                
+
+            <div class="block container-inscription hide" id="deux-joueurs">
                 <h1 class="joueur-inscription">JOUEUR 2</h1>
                 <label for="name2" class='nom'><h3>NOM</h3></label>
-                <input type="text" id="name2" name="name2">
+                <input type="text" id="name2" name="name2" placeholder="Entrez votre nom">
                 <h3>AVATAR</h3>
                 <form  class="centrer" action="">
                     
@@ -147,15 +147,14 @@
                         <img src="./images/singe.png">
                         <input type="radio" id="avatar-2c" name="avatar2">
                     </label>
-                    
-                    <button type="submit"></button>
-    
                 </form>
             </div>
-
-
         </section>
-        
+
+        <section class="flex-container centrer" id="validation">
+            <button class="hide"  type="submit" name="avatar2" id="un-joueur-ok">OK</button>
+            <button class="hide" type="submit" name="avatar2" id="deux-joueurs-ok"> OK</button>
+         </section>
 
     </main>
 
