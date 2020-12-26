@@ -106,7 +106,7 @@ p{
  	border-left:3rem solid #BCEA39;
  }
 
- #menu-jeu{
+ .menu-jeu{
  	background-color:#BCEA39;
  	flex-basis:50%;
  	height:100%;
@@ -217,6 +217,69 @@ input[type=number]:focus{
 }
 
 
+.fa-redo{
+	background-color:#989898 ;
+	color :#BCEA39;
+	font-size: 3.2rem;
+	text-align: center;
+	padding:0.4rem;
+}
+
+.fa-redo:hover{
+	background-color:#BCEA39 ;
+	color: black;
+	font-size: 3.2rem;
+	text-align: center;
+	padding:0.4rem;
+}
+
+
+.style-joueur{
+	font-size: 1.5rem;
+	background-color: black;
+	color:#BCEA39;
+	font-family: 'Roboto', sans-serif;
+    font-size:4rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1em;
+    padding: 0;
+    margin-bottom: 0.2rem;
+    border: none;
+	
+}
+
+.padding_5{
+	padding:0.5rem;
+}
+
+#choix_joueurs{
+	padding:00;
+	/* width:50%; */
+
+}
+
+#billes{
+	color: #BCEA39;
+    appearance: none;
+    outline:none;
+    border:none;
+    background-color: #989898;
+    cursor: text;
+    margin: 0.2rem;
+    font-family: 'Roboto', sans-serif;
+    font-size:4rem;
+	font-weight: 600;
+	text-align: center;
+	line-height: 4rem;
+    width:8rem;
+    height:4rem;
+    padding:0;
+    margin:0;
+    position:relative;
+
+}
+
 
 
 
@@ -285,6 +348,9 @@ input[type=number]:focus{
 /*****************MAIN : INSCRIPTION 2 JOUEURS****************/
 /*****************MAIN : INSCRIPTION 2 JOUEURS****************/
 /*****************MAIN : INSCRIPTION 2 JOUEURS****************/
+.clair{
+	background-color: #E5E5E5;
+}
 
 .block>h1{
 	display:block;
@@ -296,12 +362,23 @@ input[type=number]:focus{
 .container-inscription{
 	display:flex;
 	flex-flow:column;
-/*	justify-content: center;*/
+	justify-content: center;
 	text-align: center;
     align-items: stretch;
 	width:48%;
 	height: 85%;
-	background-color: #E5E5E5;
+	margin-top: 1rem;
+}
+
+#name1,
+#name2{
+	padding:0.2rem;
+	text-align:center;
+}
+
+#un-joueur [disabled],
+#deux-joueurs [disabled]{
+	opacity: 50%;
 }
 
 label>h3{
@@ -353,7 +430,7 @@ input[type=text]:focus{
 input[name=avatar1],
 input[name=avatar2]{
 	position:absolute;
-	background-color:#BCEA39;
+	background-color: transparent;
 	width:8rem;
 	height:8rem;
 	z-index:1;
@@ -387,7 +464,7 @@ button[type=submit]{
 	font-family: 'Roboto', sans-serif;
 	font-weight: 600;
 	font-size: 2rem;
-	margin: 0;
+	margin: 1rem auto;
 	padding: 0; 
 }
 

@@ -12,6 +12,9 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="jeu_de_billes.css">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/3af21f424e.js" crossorigin="anonymous"></script>
     
 </head>
 
@@ -38,29 +41,71 @@
 
     <!-- HEADER : PAGE INTRO   -->
     <header class="flex-container titre centrer">
+
         <h1 id="nom-jeu">JEU DE BILLES</h1>
 
-        <form action="" id="menu-jeu" class="column">
-            <div class="flex-container">
+        <form action="" id="menu-jeu" class="flex-container menu-jeu hide">
+            
+            <div class="column">
+
                 <h4>NOMBRE DE JOUEURS</h4>
-                <h4>NOMBRE<br>DE BILLES</h4>
+                <div class="flex-container">
+                    <div class="item">
+                        <input type="radio" id="un" name="nb_joueurs" value="1">
+                        <label for="un">1</label>
+                    </div>
+    
+                    <div class="item">
+                        <input type="radio" id="deux" name="nb_joueurs" value="2">
+                        <label for="deux">2</label>      
+                    </div> 
+                </div> 
+
             </div>
 
-            <div class="flex-container">
-                <div class="item">
-                    <input type="radio" id="un" name="nb_joueurs" value="1">
-                    <label for="un">1</label>
-                </div>
 
-                <div class="item">
-                    <input type="radio" id="deux" name="nb_joueurs" value="2">
-                    <label for="deux">2</label>      
-                </div>             
-  
+            <div class="column">
+                
+                <h4>NOMBRE<br>DE BILLES</h4>
                 <input type=number name="nombre-billes" min="20" max="100" value="">
 
             </div>
+
         </form>
+
+
+        <!----Clone du tableau de "menu-jeu" avec reubriques pour jeu 2 joueurs-->
+        <section id="menu-jeu-02" class="flex-container menu-jeu hide">
+            
+            <div class="flex-container">
+
+                <div class="column  padding_5" id="choix_joueurs">
+                    <h4>NB. JOUEURS</h4>
+                    <div class="item">
+                        <h4 class="style-joueur">2</h4>
+                    </div> 
+                </div>
+
+                <div class="column  padding_5">
+                    <h4>NOUVELLE PARTIE</h4>
+                    <div class="item">
+                        <a href="jeu_de_billes.html"><i class="fas fa-redo"></i></a>
+                    </div> 
+                </div>
+            
+            </div>
+
+
+            <div class="column" id="choix_billes">
+                 
+                <h4>NOMBRE<br>DE BILLES</h4>
+                <div id="billes"></div>
+
+            </div>
+
+        </section>
+
+        
     </header>
 
 
@@ -76,7 +121,7 @@
         <section id="jeu">
 
             <!-- Bouton de lancement du jeu-->
-            <div class="circle" id="circle">
+            <div class="circle hide" id="circle">
                 <button type="button" id="play">
                     <h2 >LET'S PLAY</h2>
                     <p class="message" id="messageJoueur"></p>
@@ -96,64 +141,70 @@
 
         <section class="flex-container centrer">
 
-            <div class="block container-inscription hide" id="un-joueur">
-                <h1 class="joueur-inscription">JOUEUR 1</h1>
-                <label for="name1" class='nom'><h3>NOM</h3></label>
-                <input type="text" id="name1" name="name1" placeholder="Entrez votre nom">
-                <h3>AVATAR</h3>
-                <form  class="centrer" action="">
-                    
-                    <label for="avatar_1a" class="label-avatar">
-                        <img src="./images/singe.png">
-                        <input type="radio" id="avatar-1a" name="avatar1">
-                    </label>
+            <div class="container-inscription centrer hide" id="un-joueur">
+                <div class="block  column  clair">
+                    <h1 class="joueur-inscription">JOUEUR 1</h1>
+                    <label for="name1" class='nom'><h3>NOM</h3></label>
+                    <input type="text" id="name1" name="name1" placeholder="Entrez votre nom" disabled>
+                    <h3>AVATAR</h3>
+                    <form  class="centrer" action="" disabled>
+                        
+                        <label for="avatar_1a" class="label-avatar">
+                            <img src="./images/avatar_01.png">
+                            <input type="radio" id="avatar-1a" name="avatar1">
+                        </label>
 
-                    
-                    <label for="avatar_1b" class="label-avatar">
-                        <img src="./images/singe.png">
-                        <input type="radio" id="avatar-1b" name="avatar1">
-                    </label>
+                        
+                        <label for="avatar_1b" class="label-avatar">
+                            <img src="./images/avatar_01.png">
+                            <input type="radio" id="avatar-1b" name="avatar1">
+                        </label>
 
-                    
-                    <label for="avatar_1c" class="label-avatar">
-                        <img src="./images/singe.png">
-                        <input type="radio" id="avatar-1c" name="avatar1">
-                    </label>
-                </form>
+                        
+                        <label for="avatar_1c" class="label-avatar">
+                            <img src="./images/avatar_01.png">
+                            <input type="radio" id="avatar-1c" name="avatar1">
+                        </label>
+                    </form>
+                </div>
+                <button class="hide"  type="submit" name="avatar2" id="un-joueur-ok" disabled>OK</button>
             </div>
 
                 
 
-            <div class="block container-inscription hide" id="deux-joueurs">
-                <h1 class="joueur-inscription">JOUEUR 2</h1>
-                <label for="name2" class='nom'><h3>NOM</h3></label>
-                <input type="text" id="name2" name="name2" placeholder="Entrez votre nom">
-                <h3>AVATAR</h3>
-                <form  class="centrer" action="">
-                    
-                    <label for="avatar_2a" class="label-avatar">
-                        <img src="./images/singe.png">
-                        <input type="radio" id="avatar-2a" name="avatar2">
-                    </label>
+            <div class="container-inscription centrer hide" id="deux-joueurs">
+                <div class="block  column  clair">
+                    <h1 class="joueur-inscription">JOUEUR 2</h1>
+                    <label for="name2" class='nom'><h3>NOM</h3></label>
+                    <input type="text" id="name2" name="name2" placeholder="Entrez votre nom"  disabled>
+                    <h3>AVATAR</h3>
+                    <form  class="centrer" action="" disabled>
+                        
+                        <label for="avatar_2a" class="label-avatar">
+                            <img src="./images/avatar_01.png">
+                            <input type="radio" id="avatar-2a" name="avatar2">
+                        </label>
 
-                    
-                    <label for="avatar_2b" class="label-avatar">
-                        <img src="./images/singe.png">
-                        <input type="radio" id="avatar-2b" name="avatar2">
-                    </label>
+                        
+                        <label for="avatar_2b" class="label-avatar">
+                            <img src="./images/avatar_01.png">
+                            <input type="radio" id="avatar-2b" name="avatar2">
+                        </label>
 
-                    
-                    <label for="avatar_2c" class="label-avatar">
-                        <img src="./images/singe.png">
-                        <input type="radio" id="avatar-2c" name="avatar2">
-                    </label>
-                </form>
+                        
+                        <label for="avatar_2c" class="label-avatar">
+                            <img src="./images/avatar_01.png">
+                            <input type="radio" id="avatar-2c" name="avatar2">
+                        </label>
+                    </form>
+                </div>
+                <button class="hide" type="submit" name="avatar2" id="deux-joueurs-ok" disabled> OK</button>
             </div>
         </section>
 
         <section class="flex-container centrer" id="validation">
-            <button class="hide"  type="submit" name="avatar2" id="un-joueur-ok">OK</button>
-            <button class="hide" type="submit" name="avatar2" id="deux-joueurs-ok"> OK</button>
+            
+            
          </section>
 
     </main>
@@ -166,7 +217,7 @@
 <!-- FOOTER : règles du jeu   -->
 <!-- FOOTER : règles du jeu   -->
 
-    <footer class="flex-container centrer noir">
+    <footer class="flex-container centrer noir hide" id="regles">
 
         <p class="regles">LE JEU : déterminer un nombre de billes initial entre 20 et 100. Chaque joueur enlève tour à tour 1, 2 ou 3 billes sans prendre le même nombre de billes que le joueur précédent.</p>
         <p class="regles">Si le joueur 1 prend 2 billes, le joueur 2 pourra en prendre 1 ou 3. Vous avez droit à 3 erreurs. Le premier joueur qui commet 4 erreurs ou qui ne peut plus jouer a perdu.</p>

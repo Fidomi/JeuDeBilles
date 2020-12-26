@@ -47,7 +47,7 @@
 var letsPlay = document.getElementById('play');
 var messageJ = document.getElementById("messageJoueur");
 var messageB = document.getElementById("messageBilles");
-var tabJeu=new Array();
+var tabJeu=[];
 
 //Variables pour l'enregistrement des joueurs
 var unJoueur = document.getElementById("un-joueur");
@@ -55,6 +55,14 @@ var deuxJoueurs = document.getElementById("deux-joueurs");
 var circle = document.getElementById("circle");
 
 //Variables pour la partie de jeu
+var affichage_billes=document.getElementById("billes");
+
+
+/*FONCTIONS OUTILS*/
+
+function toggle (target, cclass) {
+  document.getElementById(target).classList.toggle(cclass);
+}
 
 
 
@@ -63,9 +71,11 @@ var circle = document.getElementById("circle");
 /*INITIALISATION DU JEU : Choisir le nombre de joueurs et le nombre de billes*/
 /*INITIALISATION DU JEU : Choisir le nombre de joueurs et le nombre de billes*/
 
+toggle("circle","hide");
+toggle("regles","hide");
+toggle("menu-jeu","hide");
 
 /***********LET'S PLAY**********************/
-
 letsPlay.addEventListener('click',function(event){
         event.preventDefault();
         /*On efface le tableau de jeu précédent
@@ -83,8 +93,7 @@ letsPlay.addEventListener('click',function(event){
         /*Si les données sont correctement entrées,
         on affiche la page d'inscription*/
         if (tabJeu[0] && tabJeu[2] && tabJeu[2]){
-            lancementInscription();
-            console.log("lancement ok");
+            affichageInscription();
         }
   });
 
@@ -120,10 +129,36 @@ function initJeu(){
 }
 
 
-/*********Fonction pour lancer la page d'inscription : 2 joueurs***********/
-function lancementInscription(){
-  circle.setAttribute("class","circle hide");
-  console.log("hhhh");
+
+
+/*********Fonction pour afficher la page d'inscription : 2 joueurs***********/
+function affichageInscription(){
+  toggle("circle","hide");
+  toggle("regles","hide");
+  toggle("menu-jeu-02","hide");
+  toggle("menu-jeu","hide");
+  
+
+  if(tabJeu[1]==0){
+    toggle("un-joueur","hide");
+    toggle("un-joueur-ok","hide");
+  }
+  else{
+    toggle("deux-joueurs","hide");
+    toggle("deux-joueurs-ok","hide");
+    toggle("un-joueur","hide");
+    toggle("un-joueur-ok","hide");
+  }
+  //Afficher le nombre de billes du jeu dans le compteur
+ affichage_billes.innerText=tabJeu[2];
+ //Activer inscription joueur 1
+ const activeJoueur1 = document.getElementById('un-joueur');
+ var tabActiveJoueur1=activeJoueur1.querySelectorAll("[disabled]");
+ for(i=0; i<tabActiveJoueur1.length; i++){
+     tabActiveJoueur1[i].disabled=false;
+ }
 }
+
+
 
 
