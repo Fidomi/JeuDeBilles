@@ -296,7 +296,7 @@ input[type=number]:focus{
 
 /*****************MAIN : ACCUEIl*****************/
 
-#jeu{
+#lancement_jeu{
 	display:inline-flex;
 	flex:auto;
 	background-color: #989898;
@@ -376,11 +376,6 @@ input[type=number]:focus{
 	text-align:center;
 }
 
-#un-joueur [disabled],
-#deux-joueurs [disabled]{
-	opacity: 50%;
-}
-
 label>h3{
 	text-align: center;
 	margin:0;
@@ -421,11 +416,9 @@ input[type=text]:focus{
 /************** Boutons radio choix avatar************/
 /************** Boutons radio choix avatar************/
 
-.label-avatar{
-	display:flex;
-	margin:1rem;
+.joueur-inscription{
+	margin-top:0.5rem;
 }
-
 
 input[name=avatar1],
 input[name=avatar2]{
@@ -433,14 +426,20 @@ input[name=avatar2]{
 	background-color: transparent;
 	width:8rem;
 	height:8rem;
-	z-index:1;
+	z-index:5;
 }
 
 
-.joueur-inscription{
-	margin-top:0.5rem;
+.label-avatar{
+	display:flex;
+	margin:1rem;
+	z-index:5;
 }
 
+input[name=avatar1]:checked + label, 
+input[name=avatar2]:checked + label{
+	background-color: black;
+}
 
 label img{
 	z-index:6;
@@ -486,6 +485,22 @@ button[type=submit]:focus{
 	color: #BCEA39;
 }
 
+/**************DISABLED***********************/
+/**************DISABLED***********************/
+
+/* #un-joueur [disabled],
+#deux-joueurs [disabled]{
+	opacity: 50%;
+	background-color:fuchsia;
+} */
+
+button[type=submit]:disabled,
+#un-joueur [disabled],
+#deux-joueurs [disabled]{
+	opacity: 50%;
+	//Permet de désactiver les hover, focus etc...
+	pointer-events: none;
+}
 
 
 
