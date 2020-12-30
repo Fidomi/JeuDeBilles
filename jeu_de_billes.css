@@ -42,6 +42,7 @@ h3{
 }
 
 p{
+	font-family: 'Roboto', sans-serif;
 	padding:2%;
 	font-size:1.1rem;
 }
@@ -297,7 +298,7 @@ input[type=number]:focus{
 /*****************MAIN : ACCUEIl*****************/
 
 #lancement_jeu{
-	display:inline-flex;
+	/* display:inline-flex; */
 	flex:auto;
 	background-color: #989898;
 	height:30rem;
@@ -501,6 +502,59 @@ button[type=submit]:disabled,
 	//Permet de désactiver les hover, focus etc...
 	pointer-events: none;
 }
+
+
+
+/**************PARTIE DE JEU A 2 JOUEURS***********************/
+/**************PARTIE DE JEU A 2 JOUEURS***********************/
+
+#scoreJoueurUn,
+#scoreJoueurDeux{
+	width:18.7rem;
+	background-color: #e5e5e5b0;
+	order:1;
+	padding:0.6rem;
+	margin:1.5rem 0.5em 0.5em 0.5em;
+	justify-content:center;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	
+}
+
+#avatarJoueurDeux,
+#avatarJoueurUn{
+	width: 4rem;
+	height: 4rem;
+	padding-right: 0.3rem;
+}
+
+.nomJoueur{
+	font-size: 2.5rem;
+	color: black;
+	background-color: none;
+	/* border-left: #BCEA39 solid 1rem;
+	border-bottom:#BCEA39 solid 3px; */
+	line-height: 4rem;
+}
+
+.pointsDeVie{
+	display: flex;
+	padding:0.5rem;
+	flex-basis: content;
+	justify-content: center ;
+	align-items: center;
+}
+
+.pointsDeVie p{
+	font-weight: 600;
+	color : #989898;
+}
+
+.pointsDeVie img{
+	padding:2%;
+}
+
+
 
 
 

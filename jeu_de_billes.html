@@ -105,7 +105,7 @@
       <!-- Let's Play -->
       <!-- Let's Play -->
 
-      <section id="lancement_jeu" class="hide">
+      <section id="lancement_jeu" class="flex-container hide">
         <!-- Bouton de lancement du jeu-->
         <div class="circle" id="circle">
           <button type="button" id="play">
@@ -139,21 +139,21 @@
               <div class="label-avatar">
                 <input type="radio" value="avatar-1a" name="avatar1" disabled />
                 <label for="avatar_1a"
-                  ><img src="./images/avatar_01.png"
+                  ><img src="./images/avatar-1a.png"
                 /></label>
               </div>
 
               <div class="label-avatar">
                 <input type="radio" value="avatar-1b" name="avatar1" disabled />
                 <label for="avatar_1b"
-                  ><img src="./images/avatar_01.png"
+                  ><img src="./images/avatar-1b.png"
                 /></label>
               </div>
 
               <div class="label-avatar">
                 <input type="radio" value="avatar-1c" name="avatar1" disabled />
                 <label for="avatar_1c"
-                  ><img src="./images/avatar_01.png"
+                  ><img src="./images/avatar-1c.png"
                 /></label>
               </div>
             </form>
@@ -187,21 +187,21 @@
               <div class="label-avatar">
                 <input type="radio" value="avatar-2a" name="avatar2" disabled />
                 <label for="avatar_2a">
-                  <img src="./images/avatar_01.png"
+                  <img src="./images/avatar-2a.png"
                 /></label>
               </div>
 
               <div class="label-avatar">
                 <input type="radio" value="avatar-2b" name="avatar2" disabled />
                 <label for="avatar_2b"
-                  ><img src="./images/avatar_01.png"
+                  ><img src="./images/avatar-2b.png"
                 /></label>
               </div>
 
               <div class="label-avatar">
                 <input type="radio" value="avatar-2c" name="avatar2" disabled />
                 <label for="avatar_2c"
-                  ><img src="./images/avatar_01.png"
+                  ><img src="./images/avatar-2c.png"
                 /></label>
               </div>
             </form>
@@ -216,6 +216,57 @@
             OK
           </button>
         </div>
+      </section>
+
+
+      <!-- Partie de jeu 2 joueurs-->
+      <!-- Partie de jeu 2 joueurs-->
+      <section class="colum centrer hide" id="partie2joueurs">
+        <div id="scores" class="flex-container center">
+
+            <div id="scoreJoueurUn" class="column">
+              <div class="flex-container">
+                <img src="" id="avatarJoueurUn" alt="avatar-joueur-un">
+                <h4 class="nomJoueur" id="nomJoueurUn"></h4>
+              </div>
+              <div  class="pointsDeVie">
+                <p>VIE</p>
+                <div id="pointsJoueur1" class="flex-container">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                </div>
+              </div>
+            </div>
+
+            <div id="scoreJoueurDeux" class="column">
+              <div class="flex-container">
+                <img src="" id="avatarJoueurDeux" alt="avatar-joueur-deux">
+                <h4 class="nomJoueur" id="nomJoueurDeux"></h4>
+              </div>
+              <div  class="pointsDeVie">
+                <p>VIE</p>
+                <div id="pointsJoueur2" class="flex-container">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                  <img src="images/point-de-vie.png" alt="point de vie">
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <table id="myTbale"></table>
+
+
+
+
+
+
+
       </section>
 
 
