@@ -69,7 +69,7 @@
         </div>
       </form>
 
-      <!----Clone du tableau de "menu-jeu" avec eubriques pour jeu 2 joueurs-->
+      <!----Clone du tableau de "menu-jeu" avec rubriques pour jeu 2 joueurs-->
       <section id="menu-jeu-02" class="flex-container menu-jeu hide">
         <div class="flex-container">
           <div class="column padding_5" id="choix_joueurs">
@@ -231,13 +231,7 @@
               </div>
               <div  class="pointsDeVie">
                 <p>VIE</p>
-                <div id="pointsJoueur1" class="flex-container">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                </div>
+                <div id="pointsJoueur1" class="flex-container"></div>
               </div>
             </div>
 
@@ -248,18 +242,47 @@
               </div>
               <div  class="pointsDeVie">
                 <p>VIE</p>
-                <div id="pointsJoueur2" class="flex-container">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                  <img src="images/point-de-vie.png" alt="point de vie">
-                </div>
+                <div id="pointsJoueur2" class="flex-container"></div>
               </div>
             </div>
         </div>
 
-        <table id="myTbale"></table>
+        <div id="message"></div>
+
+        <div id="monTableau" ></div>
+
+        <form class="column">
+
+                   
+          <div class="flex-container">
+            <img src="" id="tourJoueurUn" class="opacite">
+
+            <div class="flex-container">
+
+              <div class="radio2">
+                <input type="radio" id="uneBille" name="billes_jouees" value="1" />
+                <label for="uneBille">1</label>
+              </div>
+
+              <div class="radio2">
+                <input type="radio" id="deuxBilles" name="billes_jouees" value="2" />
+                <label for="deuxBilles">2</label>
+              </div>
+
+              <div class="radio2">
+                <input type="radio" id="troisBilles" name="billes_jouees" value="3" />
+                <label for="troisBilles">3</label>
+              </div>
+
+            </div>
+
+            <img src="" id="tourJoueurDeux" class="opacite">
+
+          </div>
+
+          <!-- <button id="jouez" type="submit" name="billes_jouees">OK</button> -->
+
+        </form>
 
 
 

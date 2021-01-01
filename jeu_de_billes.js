@@ -1,41 +1,3 @@
-/*  NOTIONS A UTILISER DANS LE PROJET
-
-// Toggle entre fond rouge et pas de fond
-    // Donne aléatoirement une valeur du tableau
-        var tab = [10, 20, 30, 50];
-        let k = document.getElementById("keyc");
-        const ESPACE = 32;
-        document.addEventListener("keyup", function(e){
-            console.log(e.keyCode);
-            if (e.keyCode == ESPACE){
-                k.classList.toggle('d-none');
-                console.log(tab[Math.floor(Math.random()*tab.length)]);
-            }
-        });
-
-    //POUR EXECUTER QQCH AU CHARGEMENT DU DOCUMENT
-        document.addEventListener('DOMContentLoaded', function(e){
-            console.log(e.target);
-        })
-
-        addEventListener("click",function(e){
-                console.log(e.target);});
-
-
-        //POUR DESACTIVER DES BOUTONS
-        document.getElementById('ajouter').addEventListener("blur", function(){console.log("blur")});
-        document.getElementById('effacer').disabled=false;
-        document.getElementById('effacer').addEventListener("keyup", function(){ocument.getElementById('ajouter').disabled=false;});
-        let btn = document.getElementsByClassName('bouton');
-        for (let i=0; i<btn; i++){
-            btn[i].addEventListener("click",function(e){
-                console.log(e.target);
-            })
-
-        }
-
-*/
-
 /*DECLARATION DES VARIABLES*/
 
 //Variables pour l'initialisation du jeu
@@ -56,19 +18,26 @@ var joueurDeuxOK = document.getElementById("deux-joueurs-ok");
 const activeJoueur1 = document.getElementById("un-joueur");
 const activeJoueur2 = document.getElementById("deux-joueurs");
 
-//Variables pour l'enregistrement des joueurs
+//Variables pour lancement de la partie
 var nomJoueurUn = document.getElementById("nomJoueurUn");
 var nomJoueurDeux = document.getElementById("nomJoueurDeux");
 var avatarJoueurUn  = document.getElementById("avatarJoueurUn");
 var avatarJoueurDeux  = document.getElementById("avatarJoueurDeux");
+var tableau = document.getElementById("monTableau");
 
+//Variables pour la partie à 2 joueurs
+var tabPartie = [];
+var pointsJoueur1 = document.getElementById("pointsJoueur1");
+var pointsJoueur2 = document.getElementById("pointsJoueur2");
+const jouez = document.getElementById("jouez");
+var ok2 = false;
+var vie1 = 5;
+var vie2 = 5;
+var currentPlayer = tabJeu[0];
+var message = document.getElementById("message");
+//Tableau des boutons de jeu
+var billes_jouees = document.querySelectorAll("input[name='billes_jouees']");
 
-
-/*FONCTIONS OUTILS*/
-
-function toggle(target, cclass) {
-  document.getElementById(target).classList.toggle(cclass);
-}
 
 /*INITIALISATION DU JEU : Choisir le nombre de joueurs et le nombre de billes*/
 /*INITIALISATION DU JEU : Choisir le nombre de joueurs et le nombre de billes*/
@@ -82,7 +51,8 @@ letsPlay.addEventListener("click", function (event) {
   event.preventDefault();
   /*On efface le tableau de jeu précédent
         et les messages d'erreur*/
-  tabJeu = [];
+  tabJeu = {};
+  tabPartie = [];
   console.log(tabJeu);
   messageJ.innerHTML = "";
   messageB.innerHTML = "";
@@ -106,8 +76,13 @@ letsPlay.addEventListener("click", function (event) {
     joueurDeuxOK.addEventListener("click", function (e) {
       e.preventDefault();
       validerInscriptionJoueur2();
-      partie2Joueurs();
+      if (ok2==true){
+        afficherPartie2Joueurs();
+        partie2Joueurs();
+      }
     });
+
+    
 
     
 
@@ -116,6 +91,50 @@ letsPlay.addEventListener("click", function (event) {
   //Fin algorithme de jeu
 });
 
+
+
+/*FONCTIONS OUTILS*/
+/*FONCTIONS OUTILS*/
+
+function toggle(target, cclass) {
+  document.getElementById(target).classList.toggle(cclass);
+}
+
+function pointsDeVie(points,myDiv){
+  myDiv.innerHTML="";
+ for (let i=1; i<=points; i++){
+  image = document.createElement('img');
+  image.setAttribute("src","images/point-de-vie.png");
+  myDiv.appendChild(image);
+ }
+}
+
+function affichageBilles(){
+  tableau.innerHTML="";
+  for (let i=1; i<=tabJeu[2]; i++){
+    var divBille = document.createElement('div');
+    divBille.classList.add('tailleBille');
+    divBille.innerHTML="<img src=\"images/bille.png\">";
+    tableau.appendChild(divBille);
+    }
+}
+
+function switchPlayer(){
+  if(currentPlayer==tabJeu[0]){
+    currentPlayer=tabJeu[1];
+    toggle("tourJoueurUn","opacite");
+    toggle("tourJoueurDeux","opacite");
+    }
+  else{
+    currentPlayer=tabJeu[0];
+    toggle("tourJoueurUn","opacite");
+    toggle("tourJoueurDeux","opacite");
+  }
+  tabJeu[3].currentName=currentPlayer.name;
+  tabJeu[3].currentAvatar=currentPlayer.avatar;
+}
+
+
 /*********Fonction pour initialiser le tableau de jeu***********/
 /*********Fonction pour initialiser le tableau de jeu***********/
 function initJeu() {
@@ -123,7 +142,7 @@ function initJeu() {
   var billes = document.querySelector("input[name='nombre-billes']");
   var nbBilles = billes.value;
   var nom, personnage;
-
+  
   if (joueurs[0].checked) {
     tabJeu[0] = { name: nom, avatar: personnage };
     tabJeu[1] = 0;
@@ -139,6 +158,8 @@ function initJeu() {
   } else {
     messageB.innerText = "Choisir un nombre de billes entre 20 et 100!";
   }
+
+  tabJeu[3]={currentName: nom, currentAvatar: personnage }
 
   return tabJeu;
 }
@@ -211,65 +232,158 @@ function validerInscriptionJoueur2() {
   }
   if (name2 && avatarExiste) {
     tabJeu[1] = { name: name2, avatar: avatar2 };
+    console.log("je suis dans validerInscription2");
+    ok2 = true;
+    console.log(ok2);
     toggle("enregistrement", "hide");
+    return ok2;
   }
 }
 
-/*********Fonction pour lancer la partie de jeu à 2 joueurs***********/
-/*********Fonction pour lancer la partie de jeu à 2 jouers***********/
-function partie2Joueurs() {
+/*********Fonction pour afficher la partie de jeu à 2 joueurs***********/
+/*********Fonction pour afficher la partie de jeu à 2 jouers***********/
+function afficherPartie2Joueurs(){
   //Affiche la partie de jeu
-  toggle("partie2joueurs", "hide");
   toggle("lancement_jeu","hide");
- //Entre les données des deux joueurs
+  toggle("partie2joueurs", "hide");
+  //Entrer le nom des deux joueurs
   nomJoueurUn.innerText = tabJeu[0].name;
   nomJoueurDeux.innerText = tabJeu[1].name;
+  //Afficher les avatars des deux joueurs
   avatarJoueurUn.src = 'images/' + tabJeu[0].avatar +'.png';
   avatarJoueurDeux.src = 'images/' + tabJeu[1].avatar +'.png';
-
- // On remplit le tableau de billes
- //On va cherche le tableau myTable dans la page html
- var table = document.getElementById("myTable");
- //Déterminer le nombre de lignes à 10 billes et le reste
- var nbBilles = parseInt(tabJeu[2]);
- var nbRows = Math.floor(nbBilles/10);
- var nbBillesRestantes = nbBilles%10;
- var tabBilles=[];
- console.log(tabBilles);
- console.log(nbBilles);
-
- //On crée un tableau avec toutes les billes:
- for (let i=0; i<nbBilles; i++){
-   tabBilles.push(i);
- }
-
- console.log(tabBilles);
-
-// On crée un array avec des lignes à 10 billes
-//  var tabBilles=[];
-//  for (let i=0, i<nbBilles, i++){
-//   tabBilles.push(i);
-//  }
-//  console.log(tabBilles);
+  //Afficher les points de vie des deux joueurs
+  pointsDeVie(vie1,pointsJoueur1);
+  pointsDeVie(vie2,pointsJoueur2);
+  //On affiche les billes en flexbox sur la page html
+  affichageBilles();
+  //Placer les avatars de chaque joueur de part et d'autre des boutons 
+  var tourJoueurUn = document.getElementById("tourJoueurUn");
+  tourJoueurUn.src = 'images/' + tabJeu[0].avatar +'.png';
+  var tourJoueurDeux = document.getElementById("tourJoueurDeux");
+  tourJoueurDeux.src = 'images/' + tabJeu[1].avatar +'.png';
+  toggle("tourJoueurUn","opacite");
+  tabJeu[3].currentName=tabJeu[0].name;
+  tabJeu[3].currentAvatar=tabJeu[0].avatar;
+}
 
 
-  // var row = table.insertRow(i);
-  //   for (let j=0, j<10, j++){
-  //     var cell[j]=row.insertCell(j);
-  //   }
- 
-//  var row = table.insertRow(0);
-//  //S'il reste des billes on les met sur une dernière ligne
+/*****************Algorithme du jeu à 2 joueurs***********************/
+/*****************Algorithme du jeu à 2 joueurs**********************/
+function partie2Joueurs(){
+    billes_jouees.forEach((bouton) => {
+    message.innerHTML="";
+    bouton.addEventListener("click", insertToken);
+    });
+    }
 
-// // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-// var cell1 = row.insertCell(0);
-// var cell2 = row.insertCell(1);
-
-// // Add some text to the new cells:
-// cell1.innerHTML = "NEW CELL1";
-// cell2.innerHTML = "NEW CELL2";
+function insertToken(event){
+   //On récupère le nb de billes choisi par le joueur courant
+  var choix = event.target.value;
+  tabPartie.push(choix);
+  message.innerHTML="";
+  if (tabJeu[2]-choix>1 
+      && vie1!=0 
+      && vie2!=0){
+      
+    if (tabPartie[tabPartie.length-2]!=tabPartie[tabPartie.length-1]){
+      //On retranche le nb de billes au total
+      tabJeu[2] = tabJeu[2] - choix;
+     
+      //On met à jour l'affichage du tableau de billes
+      affichageBilles();
+      //On passe au joueur suivant
+      switchPlayer();
+   
+    }
+    else if(tabPartie[tabPartie.length-2]==tabPartie[tabPartie.length-1] 
+            && tabPartie.length%2!=0){
+      //On enlève un point de vie au joueur 1
+      vie1--;
+      //On met à jour le tableau de points de vie du joeur 1
+      tabPartie[tabPartie.length-1]="erreur J1";
+      console.log(tabPartie);
+      pointsDeVie(vie1,pointsJoueur1);
+      message.innerHTML = tabJeu[0].name + " , vous avez fait une erreur! Vous perdez un point de vie!";
+       //On passe au joueur suivant
+       switchPlayer();
+      }
+    else{
+      //On enlève un point de vie au joueur 2
+      vie2--;
+      //On met à jour le tableau de points de vie du joeur 1
+      tabPartie[tabPartie.length-1]="erreur J2";
+      console.log(tabPartie);
+      pointsDeVie(vie2,pointsJoueur2);
+      message.innerHTML = tabJeu[1].name + " , vous avez fait une erreur! Vous perdez un point de vie!";
+      //On passe au joueur suivant
+      switchPlayer();
+     }
+  }
+  else if(vie1==0){
+    var gagnant = tabJeu[1];
+    affichageBilles();
+    message.innerHTML="Bravo! "+tabJeu[1].name+" a gagné! Poil au nez!";
+    return gagnant;
+  }
+  else if(vie2==0){
+    var gagnant = tabJeu[0];
+    affichageBilles();
+    message.innerHTML="Bravo! "+tabJeu[0].name+" a gagné! Poil au nez!";
+    return gagnant;
+  }
+  else if(tabJeu[2]-choix<=1){
+    var gagnant = tabJeu[3];
+    affichageBilles();
+    message.innerHTML="Bravo! "+tabJeu[3].currentName+" a gagné! Poil au nez!";
+    return gagnant;
+  }
+  else{
+    message.innerHTML="Erreur du programme. Cas non prévu.";
+  }
 
 
 
   
+
 }
+
+
+
+/*  NOTIONS A UTILISER DANS LE PROJET
+
+// Toggle entre fond rouge et pas de fond
+    // Donne aléatoirement une valeur du tableau
+        var tab = [10, 20, 30, 50];
+        let k = document.getElementById("keyc");
+        const ESPACE = 32;
+        document.addEventListener("keyup", function(e){
+            console.log(e.keyCode);
+            if (e.keyCode == ESPACE){
+                k.classList.toggle('d-none');
+                console.log(tab[Math.floor(Math.random()*tab.length)]);
+            }
+        });
+
+    //POUR EXECUTER QQCH AU CHARGEMENT DU DOCUMENT
+        document.addEventListener('DOMContentLoaded', function(e){
+            console.log(e.target);
+        })
+
+        addEventListener("click",function(e){
+                console.log(e.target);});
+
+
+        //POUR DESACTIVER DES BOUTONS
+        document.getElementById('ajouter').addEventListener("blur", function(){console.log("blur")});
+        document.getElementById('effacer').disabled=false;
+        document.getElementById('effacer').addEventListener("keyup", function(){ocument.getElementById('ajouter').disabled=false;});
+        let btn = document.getElementsByClassName('bouton');
+        for (let i=0; i<btn; i++){
+            btn[i].addEventListener("click",function(e){
+                console.log(e.target);
+            })
+
+        }
+
+*/
