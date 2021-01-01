@@ -62,8 +62,8 @@
           <input
             type="number"
             name="nombre-billes"
-            min="20"
-            max="100"
+            min="11"
+            max="25"
             value=""
           />
         </div>
@@ -131,7 +131,7 @@
               name="name1"
               placeholder="Entrez votre nom"
               minlength="3"
-              maxlength="15"
+              maxlength="9"
               disabled
             />
             <h3>AVATAR</h3>
@@ -179,7 +179,7 @@
               name="name2"
               placeholder="Entrez votre nom"
               minlength="3"
-              maxlength="15"
+              maxlength="9"
               disabled
             />
             <h3>AVATAR</h3>
@@ -283,12 +283,16 @@
           <!-- <button id="jouez" type="submit" name="billes_jouees">OK</button> -->
 
         </form>
+      </section>
 
 
-
-
-
-
+      <section class="flex-container hide" id="gagnant">
+    
+        <div class="circle">
+          <div id="messageGagnant">
+            <h2></h2>
+          </div>
+        </div>
 
       </section>
 
@@ -302,7 +306,7 @@
 
     <footer class="flex-container centrer noir hide" id="regles">
       <p class="regles">
-        LE JEU : déterminer un nombre de billes initial entre 20 et 100. Chaque
+        LE JEU : déterminer un nombre de billes initial entre 11 et 25. Chaque
         joueur enlève tour à tour 1, 2 ou 3 billes sans prendre le même nombre
         de billes que le joueur précédent.
       </p>
