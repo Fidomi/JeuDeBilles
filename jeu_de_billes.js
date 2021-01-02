@@ -19,6 +19,9 @@ var joueurUnOK = document.getElementById("un-joueur-ok");
 var joueurDeuxOK = document.getElementById("deux-joueurs-ok");
 const activeJoueur1 = document.getElementById("un-joueur");
 const activeJoueur2 = document.getElementById("deux-joueurs");
+var tabActiveJoueur2 = activeJoueur2.querySelectorAll("[disabled]");
+var tabActiveJoueur1 = activeJoueur1.querySelectorAll("[disabled]");
+var ordinateur = {name:"ordinateur",avatar:"avatar-ordinateur"};
 
 //Variables pour lancement de la partie
 var nomJoueurUn = document.getElementById("nomJoueurUn");
@@ -33,6 +36,7 @@ var pointsJoueur1 = document.getElementById("pointsJoueur1");
 var pointsJoueur2 = document.getElementById("pointsJoueur2");
 const jouez = document.getElementById("jouez");
 var ok2 = false;
+var ok1 = false;
 var vie1 = 2;
 var vie2 = 2;
 var currentPlayer = {name:"",avatar:""};
@@ -61,35 +65,50 @@ letsPlay.addEventListener("click", function (event) {
   /*On checke les nouvelles données joueur et billes
         et si c'est bon on les ajoute au tableau de jeu*/
   initJeu();
+  console.log(tabJeu);
 
   /*Si les données de jeu sont correctement entrées,
         on affiche la page d'inscription*/
-  if (tabJeu[0] && tabJeu[2] && tabJeu[2]) {
-    var tabActiveJoueur1 = affichageInscription2();
 
-    //On enregistre les infos des joueurs
+  //Affichage jeu à deux joueurs
+  if (tabJeu[0] && tabJeu[1]!=ordinateur && tabJeu[2]) {
+    affichageInscription();
+
+      joueurUnOK.addEventListener("click", function (e) {
+        e.preventDefault();
+        validerInscriptionJoueur1();
+      });
+
+      joueurDeuxOK.addEventListener("click", function (e) {
+        e.preventDefault();
+        validerInscriptionJoueur2();
+        if (ok2==true){
+          afficherPartie2Joueurs();
+          let resultat = partie2Joueurs();   
+          }
+      });
+    // }
+    //Fin affichage du jeu à deux joueurs
+  }
+  
+  //Affichage jeu à un joueur
+  if (tabJeu[0] && tabJeu[1]==ordinateur && tabJeu[2]) {
+    affichageInscription();
+
     joueurUnOK.addEventListener("click", function (e) {
       e.preventDefault();
-      validerInscriptionJoueur1(tabActiveJoueur1);
+      validerInscriptionJoueur1();
+      console.log(ok1);
+      if (ok1==true){
+          afficherPartie1Joueur();
+          let resultat = partie2Joueurs();
+          console.log("ok1 1 joueur");
+      }
     });
-
-    joueurDeuxOK.addEventListener("click", function (e) {
-      e.preventDefault();
-      validerInscriptionJoueur2();
-      if (ok2==true){
-        afficherPartie2Joueurs();
-        var resultat = partie2Joueurs();   
-        }
-    });
-
-    
-
-    
-
-    //Fin affichage du jeu
   }
-  //Fin algorithme de jeu
+  //Fin affichage du jeu à un joueur
 });
+//Fin algorithme de jeu
 
 
 
@@ -134,10 +153,6 @@ function switchPlayer(currentPlayer){
       currentPlayer.avatar=tabJeu[0].avatar;
     toggle("tourJoueurUn","opacite");
     toggle("tourJoueurDeux","opacite");
-    // tabJeu[3].currentName=currentPlayer.name;
-    // tabJeu[3].currentAvatar=currentPlayer.avatar;
-    // console.log("On affiche dans la fonction switch player");
-    // console.log(currentPlayer.name);
   }
   else{
     console.log("swicthplayer ne marche pas");
@@ -147,15 +162,15 @@ function switchPlayer(currentPlayer){
 }
 
 
-/*********Fonction pour initialiser le tableau de jeu***********/
-/*********Fonction pour initialiser le tableau de jeu***********/
+/*********Fonction init pour initialiser le tableau de jeu***********/
+/*********Fonction init pour initialiser le tableau de jeu***********/
 function initJeu() {
   var billes = document.querySelector("input[name='nombre-billes']");
   var nbBilles = billes.value;
     
   if (joueurs[0].checked) {
     tabJeu[0] = { name: nom, avatar: personnage };
-    tabJeu[1] = 0;
+    tabJeu[1] = ordinateur;
   } else if (joueurs[1].checked) {
     tabJeu[0] = { name: nom, avatar: personnage };
     tabJeu[1] = { name: nom, avatar: personnage };
@@ -171,40 +186,42 @@ function initJeu() {
   return tabJeu;
 }
 
-/*********Fonction pour afficher la page d'inscription : 2 joueurs***********/
-/*********Fonction pour afficher la page d'inscription : 2 joueurs***********/
-function affichageInscription2() {
+/*********Fonction pour afficher la page d'inscription : 1 ou 2 joueurs***********/
+/*********Fonction pour afficher la page d'inscription : 1 ou 2 joueurs***********/
+function affichageInscription() {
   toggle("circle", "hide");
   toggle("regles", "hide");
-  toggle("menu-jeu-02", "hide");
   toggle("menu-jeu", "hide");
   toggle("enregistrement", "hide");
+  toggle("lancement_jeu","hide");
 
-  if (tabJeu[1] == 0) {
+  if (tabJeu[1] == ordinateur) {
     toggle("un-joueur", "hide");
     toggle("un-joueur-ok", "hide");
+    toggle("menu-jeu-01", "hide");
+    document.getElementById("billes1").innerText = tabJeu[2];
   } else {
+    toggle("menu-jeu-02", "hide");
     toggle("deux-joueurs", "hide");
     toggle("deux-joueurs-ok", "hide");
     toggle("un-joueur", "hide");
     toggle("un-joueur-ok", "hide");
+    document.getElementById("billes").innerText = tabJeu[2];
   }
-  //Afficher le nombre de billes du jeu dans le compteur
-  affichage_billes.innerText = tabJeu[2];
   //Activer inscription joueur 1
   var tabActiveJoueur1 = activeJoueur1.querySelectorAll("[disabled]");
   for (let i = 0; i < tabActiveJoueur1.length; i++) {
     tabActiveJoueur1[i].disabled = false;
   }
-    return tabActiveJoueur1;
-
+    console.log(tabActiveJoueur1);
 }
 
+
 /*********Fonction pour valider l'inscription du joueur 1***********/
 /*********Fonction pour valider l'inscription du joueur 1***********/
-function validerInscriptionJoueur1(tabActiveJoueur1) {
-  var tabActiveJoueur1 = tabActiveJoueur1;
-  var tabActiveJoueur2 = activeJoueur2.querySelectorAll("[disabled]");
+function validerInscriptionJoueur1() {
+  // var tabActiveJoueur1 = tabActiveJoueur1;
+
   //On vérifie que les infos du joueur 1 sont ok
   var name1 = document.getElementById("name1");
   var listeAvatar1 = document.querySelectorAll('input[name="avatar1"]');
@@ -224,6 +241,12 @@ function validerInscriptionJoueur1(tabActiveJoueur1) {
         currentPlayer.name=tabJeu[0].name;
         currentPlayer.avatar=tabJeu[0].avatar;  
       }
+      if(tabJeu[1]==ordinateur){
+        ok1 = true;
+        toggle("enregistrement", "hide");
+        return ok1;
+      }
+      
     }
     else{
       let j = document.querySelector("input[id='name1']");
@@ -267,7 +290,7 @@ function validerInscriptionJoueur2() {
 /*********Fonction pour afficher la partie de jeu à 2 jouers***********/
 function afficherPartie2Joueurs(){
   //Affiche la partie de jeu
-  toggle("lancement_jeu","hide");
+  // toggle("lancement_jeu","hide");
   toggle("partie2joueurs", "hide");
   //Entrer le nom des deux joueurs
   nomJoueurUn.innerText = tabJeu[0].name;
@@ -286,139 +309,239 @@ function afficherPartie2Joueurs(){
   var tourJoueurDeux = document.getElementById("tourJoueurDeux");
   tourJoueurDeux.src = 'images/' + tabJeu[1].avatar +'.png';
   toggle("tourJoueurUn","opacite");
-  // tabJeu[3].currentName=tabJeu[0].name;
-  // tabJeu[3].currentAvatar=tabJeu[0].avatar;
-  // message.innerHTML = "C'est à " + tabJeu[3].currentName + " de jouer!";
+}
+
+/*********Fonction pour afficher la partie de jeu à 1 joueur***********/
+/*********Fonction pour afficher la partie de jeu à 1 jouer***********/
+function afficherPartie1Joueur(){
+   //Affiche la partie de jeu
+  toggle("partie2joueurs", "hide");
+  document.getElementById("scoreJoueurDeux").classList.add("hide");
+  document.getElementById("tourJoueurDeux").classList.add("hide");
+  //Entrer le nom des deux joueurs
+  nomJoueurUn.innerText = tabJeu[0].name;
+  //Afficher les avatars des deux joueurs
+  avatarJoueurUn.src = 'images/' + tabJeu[0].avatar +'.png';
+  //Afficher les points de vie des deux joueurs
+  pointsDeVie(vie1,pointsJoueur1);
+  //On affiche les billes en flexbox sur la page html
+  affichageBilles();
+  //Placer les avatars de chaque joueur de part et d'autre des boutons 
+  var tourJoueurUn = document.getElementById("tourJoueurUn");
+  tourJoueurUn.src = 'images/' + tabJeu[0].avatar +'.png';
+  toggle("tourJoueurUn","opacite");
 }
 
 
-/*****************Algorithme du jeu à 2 joueurs***********************/
-/*****************Algorithme du jeu à 2 joueurs**********************/
+/*****************Algorithme du jeu à 1 et 2 joueurs***********************/
+/*****************Algorithme du jeu à 1 et 2 joueurs**********************/
 function partie2Joueurs(){
+  // if(tabJeu[1].name != "ordinateur"){
     message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
     billes_jouees.forEach((bouton) => {
     bouton.addEventListener("click", insertToken);
     });
-    }
+  }
+    
 
 function insertToken(event){
    //On récupère le nb de billes choisi par le joueur courant
   var choix = event.target.value;
   tabPartie.push(choix);
   message.innerHTML="";
-  
-  if (tabJeu[2]-choix>1    
-      && vie1!=0 
-      && vie2!=0){
-      
-    if (tabPartie[tabPartie.length-2]!=tabPartie[tabPartie.length-1]){
-      //On retranche le nb de billes au total
-      message.innerHTML = currentPlayer.name + " a pris " + choix + " billes.";
-      tabJeu[2] = tabJeu[2] - choix;
-      //Afficher le nombre de billes du jeu dans le compteur
-      affichage_billes.innerText = tabJeu[2];
-      //On met à jour l'affichage du tableau de billes
-      affichageBilles();
-      //On passe au joueur suivant
-      switchPlayer(currentPlayer);
-      message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
-    }
-    else if(tabPartie[tabPartie.length-2]==tabPartie[tabPartie.length-1] 
-            && tabPartie.length%2!=0){
-      //On enlève un point de vie au joueur 1
-      vie1--;
-      if(vie1!=0){
-        //On met à jour le tableau de points de vie du joeur 1
-        tabPartie[tabPartie.length-1]="erreur J1";
-        pointsDeVie(vie1,pointsJoueur1);
-        message.innerHTML = tabJeu[0].name + " , vous avez fait une erreur! Vous perdez un point de vie!";
-        //On passe au joueur suivant
-        switchPlayer(currentPlayer);
-        message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
+  console.log("current player name est:");
+  console.log(currentPlayer.name);
+ 
+    //Si les conditions de jeu sont encore réunies
+    if (tabJeu[2]-choix>1    
+        && vie1!=0 
+        && vie2!=0){
+      //Si le coup joué est valide :  
+      if (tabPartie[tabPartie.length-2]!=tabPartie[tabPartie.length-1]){
+        //Si c'est une partie à 2 joueurs :
+        if(tabJeu[1].name!="ordinateur"){
+          console.log("Je suis dans la partie 2 joueurs");
+          console.log(tabJeu[1].name!="ordinateur");
+          //On retranche le nb de billes au total
+          message.innerHTML = currentPlayer.name + " a pris " + choix + " billes.";
+          tabJeu[2] = tabJeu[2] - choix;
+          //Afficher le nombre de billes du jeu dans le compteur
+          affichage_billes.innerText = tabJeu[2];
+          //On met à jour l'affichage du tableau de billes
+          affichageBilles();
+          //On passe au joueur suivant
+          switchPlayer(currentPlayer);
+          message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
+        }
+         //Si c'est une partie contre l'ordinateur
+
+        else if(tabJeu[1].name=="ordinateur"){
+           //On retranche le nb de billes au total
+           message.innerHTML = currentPlayer.name + " a pris " + choix + " billes.";
+           tabJeu[2] = tabJeu[2] - choix;
+           console.log(tabJeu[2]);
+           //Afficher le nombre de billes du jeu dans le compteur
+           document.getElementById("billes1").innerText = tabJeu[2];
+           //On met à jour l'affichage du tableau de billes
+           affichageBilles();
+           //On passe à l'ordinateur
+           switchPlayer(currentPlayer);
+           jeuOrdinateur();
+          }
+          else{
+            message.innerHTML="Erreur 3 du programme. Cas non prévu.";
+          }
+       }
+      //Si le coup joué n'est pas valide (joueur 1 s'est planté):
+      else if(tabPartie[tabPartie.length-2]==tabPartie[tabPartie.length-1] 
+              && tabPartie.length%2!=0){
+        //On enlève un point de vie au joueur 1
+        vie1--;
+        if(vie1!=0){
+          //On met à jour le tableau de points de vie du joeur 1
+          tabPartie[tabPartie.length-1]="erreur J1";
+          pointsDeVie(vie1,pointsJoueur1);
+          message.innerHTML = tabJeu[0].name + " , vous avez fait une erreur! Vous perdez un point de vie!";
+          //On passe au joueur suivant
+          switchPlayer(currentPlayer);
+          message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
+          if(tabJeu[1].name=="ordinateur"){
+            jeuOrdinateur();
+          }
+        }
+        else{
+          var gagnant = tabJeu[1];
+          affichageBilles();
+          message.innerHTML="Bravo! "+tabJeu[1].name+" a gagné! Poil au nez!";
+          findePartie(gagnant);
+          return gagnant;
+        }
       }
+      //Si le coup joué n'est pas valide (joueur 2 s'est planté):
       else{
-        var gagnant = tabJeu[1];
-        affichageBilles();
-        message.innerHTML="Bravo! "+tabJeu[1].name+" a gagné! Poil au nez!";
-        findePartie(gagnant);
-        return gagnant;
+        //On enlève un point de vie au joueur 2
+        vie2--;
+        if(vie2!=0){
+          //On met à jour le tableau de points de vie du joueur 1
+          tabPartie[tabPartie.length-1]="erreur J2";
+          pointsDeVie(vie2,pointsJoueur2);
+          message.innerHTML = tabJeu[1].name + " , vous avez fait une erreur! Vous perdez un point de vie!";
+          //On passe au joueur suivant
+          switchPlayer(currentPlayer);
+          message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
+        }
+        else{
+          var gagnant = tabJeu[0];
+          affichageBilles();
+          message.innerHTML="Bravo! "+tabJeu[0].name+" a gagné! Poil au nez!";
+          findePartie(gagnant);
+          return gagnant;
+        }
       }
     }
-    else{
-      //On enlève un point de vie au joueur 2
-      vie2--;
-      if(vie2!=0){
-        //On met à jour le tableau de points de vie du joeur 1
-        tabPartie[tabPartie.length-1]="erreur J2";
-        pointsDeVie(vie2,pointsJoueur2);
-        message.innerHTML = tabJeu[1].name + " , vous avez fait une erreur! Vous perdez un point de vie!";
-        //On passe au joueur suivant
-        switchPlayer(currentPlayer);
-        message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
-      }
-      else{
-        var gagnant = tabJeu[0];
-        affichageBilles();
-        message.innerHTML="Bravo! "+tabJeu[0].name+" a gagné! Poil au nez!";
-        findePartie(gagnant);
-        return gagnant;
-      }
-     }
-  }
-  else if(vie1==0){
-    var gagnant = tabJeu[1];
-    findePartie(gagnant);
-    return gagnant;
-  }
-  else if(vie2==0){
-    var gagnant = tabJeu[0];
-    findePartie(gagnant);
-    return gagnant;
-  }
-  else if (tabJeu[2]-choix==1    
-    && vie1!=0 
-    && vie2!=0){
-      message.innerHTML = currentPlayer.name + " a pris " + choix + " billes.";
-      tabJeu[2] = tabJeu[2] - choix;
-      //Afficher le nombre de billes du jeu dans le compteur
-      affichage_billes.innerText = tabJeu[2];
-      //On met à jour l'affichage du tableau de billes
-      affichageBilles();
-      message.innerHTML += currentPlayer.name + " a gagné!!!";
-      var gagnant = currentPlayer;
+    //Si les conditions de jeu ne sont plus réunies
+    //Le joueur 1 n'a plus de point de vie
+    else if(vie1==0){
+      var gagnant = tabJeu[1];
       findePartie(gagnant);
       return gagnant;
     }
-  else if (tabJeu[2]-choix<1    
-    && vie1!=0 
-    && vie2!=0){
-      if(tabPartie.length%2!=0){
-        vie1--
-        pointsDeVie(vie1,pointsJoueur1);
-        if(vie1==0){
-          var gagnant = tabJeu[1];
-          findePartie(gagnant);
-          return gagnant;
+    //Si les conditions de jeu ne sont plus réunies
+    //Le joueur 2 n'a plus de point de vie
+    else if(vie2==0){
+      var gagnant = tabJeu[0];
+      findePartie(gagnant);
+      return gagnant;
+    }
+    //S'il ne reste plus qu'une seule bille
+    else if (tabJeu[2]-choix==1    
+      && vie1!=0 
+      && vie2!=0){
+        message.innerHTML = currentPlayer.name + " a pris " + choix + " billes.";
+        tabJeu[2] = tabJeu[2] - choix;
+        //Afficher le nombre de billes du jeu dans le compteur
+        affichage_billes.innerText = tabJeu[2];
+        //On met à jour l'affichage du tableau de billes
+        affichageBilles();
+        message.innerHTML += currentPlayer.name + " a gagné!!!";
+        var gagnant = currentPlayer;
+        findePartie(gagnant);
+        return gagnant;
+      }
+    //Si le nombre de billes devient négatif : on annule le coup
+    else if (tabJeu[2]-choix<1    
+      && vie1!=0 
+      && vie2!=0){
+        if(tabPartie.length%2!=0){
+          vie1--
+          pointsDeVie(vie1,pointsJoueur1);
+          if(vie1==0){
+            var gagnant = tabJeu[1];
+            findePartie(gagnant);
+            return gagnant;
+          }
         }
-      }
-      else{
-        vie2--
-        pointsDeVie(vie2,pointsJoueur2);
-        if(vie2==0){
-          var gagnant = tabJeu[0];
-          findePartie(gagnant);
-          return gagnant;
+        else{
+          vie2--
+          pointsDeVie(vie2,pointsJoueur2);
+          if(vie2==0){
+            var gagnant = tabJeu[0];
+            findePartie(gagnant);
+            return gagnant;
+          }
         }
-      }
-      message.innerHTML = currentPlayer.name + " , vous ne pouvez pas jouer ce nombre de billes. Vous perdez un point de vie!";
-      tabPartie[tabPartie.length-1]="erreur"+currentPlayer.name;
-      switchPlayer(currentPlayer);
-      message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
-      }
-  else{
-    message.innerHTML="Erreur du programme. Cas non prévu.";
-  }
+        message.innerHTML = currentPlayer.name + " , vous ne pouvez pas jouer ce nombre de billes. Vous perdez un point de vie!";
+        tabPartie[tabPartie.length-1]="erreur"+currentPlayer.name;
+        switchPlayer(currentPlayer);
+        message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
+        }
+    //Si on ne comprend plus rien    
+    else{
+      message.innerHTML="Erreur du programme. Cas non prévu.";
+    }
+  
 }
+
+function jeuOrdinateur(){
+  var newT=[];
+            for(i=1; i<4; i++){
+              if (i!=tabPartie[tabPartie.length-1]){
+                newT.push(i);
+              }
+            }
+            console.log("le tabPartie est de :");
+            console.log(tabPartie);
+            console.log("le newT est de :");
+            console.log(newT);
+  var jeuOrdi = newT[Math.floor(Math.random()*newT.length)];
+            message.innerHTML += "L'ordinateur en a pris " + jeuOrdi + " !";
+            //On vérifie les données de jeu de l'ordinateur
+            if(tabJeu[2]-jeuOrdi>1){
+              tabPartie.push(jeuOrdi);
+              tabJeu[2] = tabJeu[2] - jeuOrdi;
+              affichageBilles();
+              switchPlayer(currentPlayer);
+              document.getElementById("billes1").innerText = tabJeu[2];
+              message.innerHTML += "C'est à " + currentPlayer.name + " de jouer!";
+            }
+            else if(tabJeu[2]-jeuOrdi==1){
+              message.innerHTML += currentPlayer.name + " a gagné!!!";
+              var gagnant = currentPlayer;
+              findePartie(gagnant);
+              return gagnant;
+            }
+            else if(tabJeu[2]-jeuOrdi<1){
+              switchPlayer(currentPlayer);
+              message.innerHTML += currentPlayer.name + " a gagné!!!";
+              var gagnant = currentPlayer;
+              findePartie(gagnant);
+              return gagnant;
+            }
+            else{
+              message.innerHTML="Erreur 2 du programme. Cas non prévu.";
+            }
+}
+
 
 function findePartie(gagnant){
     toggle("partie2joueurs", "hide");
@@ -427,7 +550,7 @@ function findePartie(gagnant){
     divGagnant = document.getElementById("messageGagnant");
     divGagnant.querySelector('h2').innerHTML=gagnant.name + "<br>\ a gagné!";
     image = document.createElement('img');
-    image.src = 'images/' + tabJeu[0].avatar +'.png';
+    image.src = 'images/' + gagnant.avatar +'.png';
     divGagnant.appendChild(image);
     
     console.log(gagnant.name);
@@ -465,7 +588,7 @@ function findePartie(gagnant){
         document.getElementById('effacer').disabled=false;
         document.getElementById('effacer').addEventListener("keyup", function(){ocument.getElementById('ajouter').disabled=false;});
         let btn = document.getElementsByClassName('bouton');
-        for (let i=0; i<btn; i++){
+        for (let i=0; i<btn.length; i++){
             btn[i].addEventListener("click",function(e){
                 console.log(e.target);
             })

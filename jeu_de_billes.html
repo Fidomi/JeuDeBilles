@@ -92,6 +92,30 @@
           <div id="billes"></div>
         </div>
       </section>
+
+      <!----Clone du tableau de "menu-jeu" avec rubriques pour jeu 1 joueur-->
+      <section id="menu-jeu-01" class="flex-container menu-jeu hide">
+        <div class="flex-container">
+          <div class="column padding_5" id="choix_joueurs">
+            <h4>NB. JOUEURS</h4>
+            <div class="item">
+              <h4 class="style-joueur">1</h4>
+            </div>
+          </div>
+
+          <div class="column padding_5">
+            <h4>NOUVELLE PARTIE</h4>
+            <div class="item">
+              <a href="jeu_de_billes.html"><i class="fas fa-redo"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="column" id="choix_billes">
+          <h4>NOMBRE<br />DE BILLES</h4>
+          <div id="billes1"></div>
+        </div>
+      </section>
     </header>
 
     <!-- MAIN : corps du jeu   -->
@@ -219,8 +243,8 @@
       </section>
 
 
-      <!-- Partie de jeu 2 joueurs-->
-      <!-- Partie de jeu 2 joueurs-->
+      <!-- Partie de jeu 1 ou 2 joueurs-->
+      <!-- Partie de jeu 1 ou 2 joueurs-->
       <section class="colum centrer hide" id="partie2joueurs">
         <div id="scores" class="flex-container center">
 
@@ -257,7 +281,7 @@
           <div class="flex-container">
             <img src="" id="tourJoueurUn" class="opacite">
 
-            <div class="flex-container">
+            <div class="flex-container" id="boutons-billes">
 
               <div class="radio2">
                 <input type="radio" id="uneBille" name="billes_jouees" value="1" />
@@ -280,11 +304,9 @@
 
           </div>
 
-          <!-- <button id="jouez" type="submit" name="billes_jouees">OK</button> -->
-
         </form>
       </section>
-
+    
 
       <section class="flex-container hide" id="gagnant">
     
